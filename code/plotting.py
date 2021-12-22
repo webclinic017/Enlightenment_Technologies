@@ -53,7 +53,6 @@ def visualize_stock_fit(data_target, training_data_len, predicted_stock_price, t
     print('\n' + L2_Distance_Label)
 
     # Plotting
-    plt.figure(figsize=(10,5))
     plt.title(model_label +' Model Forcasting for ' + ticker + weather_label + prediction_legend_label)
     plt.xlabel('DATE', fontsize=12)
     plt.ylabel('Close Price USD ($)', fontsize=12)
