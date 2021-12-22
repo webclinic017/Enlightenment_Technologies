@@ -1,5 +1,6 @@
 from main_support import run_model, run_multi_model
 
+import matplotlib.pyplot as plt
 import numpy as np
 
 def run(prediction_parameters, ticker, dates, specifications, models, which_run):
@@ -12,8 +13,8 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
     prediction_window_len = prediction_window_vector[1] - prediction_window_vector[0]
     
     # Make Vectors for Plotting
-    batch_num_axis = np.zeros(batch_num_len)
-    prediction_window_axis = np.zeros(prediction_window_len)
+    batch_num_axis = np.zeros(batch_num_len).reshape(batch_num_len,1)
+    prediction_window_axis = np.zeros(prediction_window_len).reshape(prediction_window_len,1)
     parameter_exploration_array = np.zeros(batch_num_len*prediction_window_len).reshape(batch_num_len,prediction_window_len)
     
     single_run = which_run[0]
@@ -22,13 +23,13 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
     
     for i in range(batch_num_vector[0], batch_num_vector[1]):
         
-        batch_num_axis[i] = i
-        prediction_parameters[1] = batch_num_vector[i]
+        batch_num_axis[i - batch_num_vector[0]] = i
+        prediction_parameters[1] = i
         
         for j in range(prediction_window_vector[0], prediction_window_vector[1]):
             
-            prediction_window_axis[j] = j
-            prediction_parameters[3] = prediction_window_vector[j]
+            prediction_window_axis[j - prediction_window_vector[0]] = j
+            prediction_parameters[3] = j
     
             # Single Model Run
             if single_run == True:
@@ -58,4 +59,5 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
                         
             parameter_exploration_array[i,j] = L2_Score
             
-    
+    ax = plt.axes(projection='3d')
+    ax.plot_trisurf(prediction_window_axis, batch_num_axis, parameter_exploration_array, cmap='viridis', edgecolor='none')

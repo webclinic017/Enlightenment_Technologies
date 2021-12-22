@@ -1,5 +1,5 @@
 from utilities import time
-from run_paramter_exploration import run
+from run_parameter_exploration import run
 
 import os
 
@@ -9,12 +9,12 @@ def main():
     start_time = time('start')     
 
     # Important Parameters
-    epoch_num = 30 
+    epoch_num = 5 
     batch_num_vector = [10, 15]
     training_set_len = .5
-    prediction_window_vector = [5, 100]
+    prediction_window_vector = [10, 15]
     predict_col_num = 3 # Open Price is 3
-    num_of_predictions = 5
+    num_of_predictions = 2
     prediction_parameters = [epoch_num, batch_num_vector, training_set_len, prediction_window_vector, predict_col_num, num_of_predictions]
     
     # Tickers for Comparisons
@@ -22,7 +22,7 @@ def main():
     tech_tickers = ['AAPL', 'GOOGL']
     bank_tickers = ['JPM', 'MS']
     pharma_tickers = ['JNJ', 'PFE']
-    ticker = 'BUD'
+    ticker = 'JPM'
     
     # Specify the Models Being Considered
     models = ['lstm', 'cnn_lstm', 'cnn_lstm_attn']
