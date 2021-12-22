@@ -37,7 +37,7 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
                 L2_Score = run_model(prediction_parameters, ticker, dates, specifications, models[2])
                 
             # Run All Six Variations 
-            if single_run == True:    
+            if multi_model == True:    
                 
                 L2_Score = run_multi_model(prediction_parameters, ticker, dates, specifications)
             
