@@ -6,7 +6,7 @@ from utilities import accuracy, round_sig
 
 pd.options.mode.chained_assignment = None
 
-def visualize_stock_fit(data_target, training_data_len, predicted_stock_price, ticker, selfpredict, prediction_num, model_label, with_temp, plot_other_predictions):
+def visualize_stock_fit(data_target, training_data_len, predicted_stock_price, ticker, selfpredict, prediction_num, model_label, with_temp, plot_other_predictions, visualize_results, return_L2):
     
     if selfpredict == True: 
         prediction_legend_label = ' and w/ Selfpredict'
@@ -72,7 +72,12 @@ def visualize_stock_fit(data_target, training_data_len, predicted_stock_price, t
     plt.plot(valid['Prediction Average'], label = 'Average Prediction: ' + r'$L_1$ = {}'.format(L1_Distance) + r', $L_2$ = {}'.format(L2_Distance))
     #plt.legend(['Average Prediction' + r'$L_1$ = {}'.format(L1_Distance) + r', $L_2$ = {}'.format(L2_Distance)], loc='upper left')
     plt.legend(loc='upper left')
-    plt.show()
+    
+    if visualize_results == True:
+        
+        plt.show()
+        
+    return L2_Distance
     
     
 # Utility function for plotting of the model results

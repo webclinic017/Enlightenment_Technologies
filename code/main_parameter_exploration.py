@@ -9,11 +9,9 @@ def main():
     start_time = time('start')     
 
     # Important Parameters
-    epoch_num = 30
-    batch_num = 10   
-    batch_num_vector = [1, 50]
-    training_set_len = .8
-    prediction_window = 15   
+    epoch_num = 30 
+    batch_num_vector = [10, 15]
+    training_set_len = .5
     prediction_window_vector = [5, 100]
     predict_col_num = 3 # Open Price is 3
     num_of_predictions = 5
@@ -39,7 +37,9 @@ def main():
     with_weather_data = False
     plot_the_data = False
     plot_other_predictions = False
-    specifications = [self_predict, with_weather_data, plot_the_data, plot_other_predictions]
+    visualize_results = False
+    return_L2 = True
+    specifications = [self_predict, with_weather_data, plot_the_data, plot_other_predictions, visualize_results, return_L2]
     
     # Which Model to Run
     single_run = True

@@ -6,7 +6,7 @@ from utilities import accuracy, round_sig
 
 pd.options.mode.chained_assignment = None
 
-def multi_visualize_stock_fit(data_target, training_data_len, LSTM_multiple_predictions, CNN_multiple_predictions, ATTN_multiple_predictions, ticker, selfpredict, prediction_num, with_temp, plot_other_predictions):
+def multi_visualize_stock_fit(data_target, training_data_len, LSTM_multiple_predictions, CNN_multiple_predictions, ATTN_multiple_predictions, ticker, selfpredict, prediction_num, with_temp, plot_other_predictions, visualize_results, return_L2):
     
     if selfpredict == True: 
         prediction_legend_label = ' and w/ Selfpredict'
@@ -112,7 +112,12 @@ def multi_visualize_stock_fit(data_target, training_data_len, LSTM_multiple_pred
     plt.plot(valid['Close'], label = 'Test')
     
     plt.legend(loc='best')
-    plt.show()
+    
+    if visualize_results == True:
+        
+        plt.show()
+        
+    return LSTM_L2_Distance, CNN_L2_Distance, ATTN_L2_Distance
     
     
 # Utility function for plotting of the model results

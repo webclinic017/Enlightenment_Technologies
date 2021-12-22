@@ -14,6 +14,8 @@ def run_model(prediction_parameters, ticker, dates, specifications, model_type):
     with_temp = specifications[1]
     plot_the_data = specifications[2]
     plot_other_predictions = specifications[3]
+    visualize_results = specifications[4]
+    return_L2 = specifications[5]
 
     # Important Parameters 
     epoch_num = prediction_parameters[0]
@@ -85,11 +87,14 @@ def run_model(prediction_parameters, ticker, dates, specifications, model_type):
             multiple_loss[k, i] = loss[k]
             multiple_val_loss[k, i] = val_loss[k]
             
-    
-    # Visualize Results
-    visualize_stock_fit(data_target, training_data_len, multiple_predictions, ticker, selfpredict, prediction_num, model_label, with_temp, plot_other_predictions)
+        
+    L2_Score = visualize_stock_fit(data_target, training_data_len, multiple_predictions, ticker, selfpredict, prediction_num, model_label, with_temp, plot_other_predictions, visualize_results, return_L2)
     visualize_loss(multiple_loss, prediction_num, model_label, with_temp, ticker)
-    visualize_val_loss(multiple_val_loss, prediction_num, model_label, with_temp, ticker)
+    visualize_val_loss(multiple_val_loss, prediction_num, model_label, with_temp, ticker) 
+    
+    if return_L2 == True:
+        
+        return L2_Score
     
     
 def run_multi_model(prediction_parameters, ticker, dates, specifications):   
@@ -98,6 +103,8 @@ def run_multi_model(prediction_parameters, ticker, dates, specifications):
     with_temp = specifications[1]
     plot_the_data = specifications[2]
     plot_other_predictions = specifications[3]
+    visualize_results = specifications[4]
+    return_L2 = specifications[5]
 
     # Important Parameters 
     epoch_num = prediction_parameters[0]
@@ -210,13 +217,14 @@ def run_multi_model(prediction_parameters, ticker, dates, specifications):
             
             ATTN_multiple_loss[k, i] = loss[k]
             ATTN_multiple_val_loss[k, i] = val_loss[k]
-            
-    # Visualize Results
-    multi_visualize_stock_fit(data_target, training_data_len, LSTM_multiple_predictions, CNN_multiple_predictions, ATTN_multiple_predictions, ticker, selfpredict, prediction_num, with_temp, plot_other_predictions)
-    #mutli_visualize_loss(LSTM_multiple_loss, CNN_multiple_loss, ATTN_multiple_loss, prediction_num, with_temp, ticker)
-    #mutli_visualize_val_loss(LSTM_multiple_val_loss, CNN_multiple_val_loss, ATTN_multiple_val_loss, prediction_num, with_temp, ticker)
+        
+    L2_Score = multi_visualize_stock_fit(data_target, training_data_len, LSTM_multiple_predictions, CNN_multiple_predictions, ATTN_multiple_predictions, ticker, selfpredict, prediction_num, with_temp, plot_other_predictions, visualize_results, return_L2)
+    mutli_visualize_loss(LSTM_multiple_loss, CNN_multiple_loss, ATTN_multiple_loss, prediction_num, with_temp, ticker)
+    mutli_visualize_val_loss(LSTM_multiple_val_loss, CNN_multiple_val_loss, ATTN_multiple_val_loss, prediction_num, with_temp, ticker)
     
-    
+    if return_L2 == True:
+        
+        return L2_Score
 
 
  
