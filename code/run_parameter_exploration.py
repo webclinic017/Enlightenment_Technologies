@@ -57,7 +57,7 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
                 
                 L2_Score = L2_Score/len(ticker)
                         
-            parameter_exploration_array[i,j] = L2_Score
+            parameter_exploration_array[i - prediction_window_vector[0], j - prediction_window_vector[0]] = L2_Score
             
     ax = plt.axes(projection='3d')
     ax.plot_trisurf(prediction_window_axis, batch_num_axis, parameter_exploration_array, cmap='viridis', edgecolor='none')
