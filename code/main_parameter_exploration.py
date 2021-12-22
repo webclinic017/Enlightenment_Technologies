@@ -11,11 +11,13 @@ def main():
     # Important Parameters
     epoch_num = 30
     batch_num = 10   
-    training_set_len = .6
-    prediction_window = 15     
+    batch_num_vector = [1, 50]
+    training_set_len = .8
+    prediction_window = 15   
+    prediction_window_vector = [5, 100]
     predict_col_num = 3 # Open Price is 3
-    num_of_predictions = 1
-    prediction_parameters = [epoch_num, batch_num, training_set_len, prediction_window, predict_col_num, num_of_predictions]
+    num_of_predictions = 5
+    prediction_parameters = [epoch_num, batch_num_vector, training_set_len, prediction_window_vector, predict_col_num, num_of_predictions]
     
     # Tickers for Comparisons
     beer_tickers = ['BUD', 'TAP']
@@ -35,7 +37,7 @@ def main():
     # Additional Function Specifications
     self_predict = False
     with_weather_data = False
-    plot_the_data = True
+    plot_the_data = False
     plot_other_predictions = False
     specifications = [self_predict, with_weather_data, plot_the_data, plot_other_predictions]
     

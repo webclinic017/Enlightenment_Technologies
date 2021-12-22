@@ -9,12 +9,12 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
     # Single Model Run
     if single_run == True:
         
-        run_model(prediction_parameters, 'TAP', dates, specifications, 'cnn_lstm_attn')
+        run_model(prediction_parameters, ticker, dates, specifications, models[2])
         
     # Run All Six Variations 
     if single_run == True:    
         
-        run_multi_model(prediction_parameters, 'BUD', dates, specifications)
+        run_multi_model(prediction_parameters, ticker, dates, specifications)
     
     # Run the Model
     if category_run == True:
