@@ -61,5 +61,6 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
             print(L2_Score)
             parameter_exploration_array[i - prediction_window_vector[0], j - prediction_window_vector[0]] = L2_Score
             
-    ax = plt.axes(projection='3d')
-    ax.plot_trisurf(batch_num_axis, prediction_window_axis, parameter_exploration_array, cmap='viridis', edgecolor='none')
+    ax = plt.axes(projection ='3d')
+    ax.plot_wireframe(batch_num_axis, prediction_window_axis, parameter_exploration_array, color ='green')
+    ax.set_title('wireframe geeks for geeks')
