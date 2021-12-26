@@ -9,12 +9,12 @@ def main():
     start_time = time('start')     
 
     # Important Parameters
-    epoch_num = 2
-    batch_num_vector = [10, 12]
+    epoch_num = 10
+    batch_num_vector = [10, 13]
     training_set_len = .5
-    prediction_window_vector = [10, 12]
+    prediction_window_vector = [10, 13]
     predict_col_num = 3 # Open Price is 3
-    num_of_predictions = 1
+    num_of_predictions = 10
     prediction_parameters = [epoch_num, batch_num_vector, training_set_len, prediction_window_vector, predict_col_num, num_of_predictions]
     
     # Tickers for Comparisons
