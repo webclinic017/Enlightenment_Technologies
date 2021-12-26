@@ -96,10 +96,11 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
         cwd = os.getcwd()
         cwd_head, cwd_tail = os.path.split(cwd)
         path = cwd_head + '/plots/parameter_exploration/'
-        plot_name = 'epoch_' + str(epoch_num) + '_predictions_' + str(prediction_num) + '.fig.pickle'
+        plot_name = ticker + '_epoch_' + str(epoch_num) + '_predictions_' + str(prediction_num) + '.fig.pickle'
 
         with open(path + plot_name, 'wb') as f:
             pickle.dump(fig, f)
+            pickle.dump(fig, open(plot_name + '_hello', 'wb'))
     
     
     
