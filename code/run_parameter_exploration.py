@@ -94,8 +94,9 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
     if save_plot == True:
         
         cwd = os.getcwd()
-        path = cwd + '/plots/parameter_exploration/'
-        plot_name = 'epoch_' + epoch_num + '_predictions_' + prediction_num + '.fig.pickle'
+        cwd_head, cwd_tail = os.path.split(cwd)
+        path = cwd_head + '/plots/parameter_exploration/'
+        plot_name = 'epoch_' + str(epoch_num) + '_predictions_' + str(prediction_num) + '.fig.pickle'
 
         with open(path + plot_name, 'wb') as f:
             pickle.dump(fig, f)
