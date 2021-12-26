@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-from utilities import accuracy, round_sig
+from utilities import accuracy, round_sig, calculate_multi_L_scores
 
 pd.options.mode.chained_assignment = None
 
@@ -86,35 +86,35 @@ def multi_visualize_stock_fit(data_target, training_data_len, LSTM_multiple_pred
     ATTN_L2_Distance = str(ATTN_L2_Distance)
 
     # Plotting
-    plt.figure(figsize=(10,5))
-    plt.title(' Model Forcasting for ' + ticker + weather_label + prediction_legend_label)
-    plt.xlabel('DATE', fontsize=12)
-    plt.ylabel('Close Price USD ($)', fontsize=12)
-    
-    if plot_other_predictions == True:
-    
-        for i in range(0, prediction_num):
-        
-            LSTM_prediction_lable = 'LSTM_Prediction_' + str(i) 
-            CNN_prediction_lable = 'CNN_Prediction_' + str(i)
-            ATTN_prediction_lable = 'ATTN_Prediction_' + str(i)
-            
-            plt.plot(valid[[LSTM_prediction_lable]], alpha=0.1)
-            plt.plot(valid[[CNN_prediction_lable]], alpha=0.1)
-            plt.plot(valid[[ATTN_prediction_lable]], alpha=0.1)
-        
-    
-    plt.plot(valid['LSTM Prediction Average'], label = 'LSTM Average Prediction: ' + r'$L_1$ = {}'.format(LSTM_L1_Distance) + r', $L_2$ = {}'.format(LSTM_L2_Distance))
-    plt.plot(valid['CNN Prediction Average'], label = 'CNN Average Prediction: ' + r'$L_1$ = {}'.format(CNN_L1_Distance) + r', $L_2$ = {}'.format(CNN_L2_Distance))
-    plt.plot(valid['ATTN Prediction Average'], label = 'ATTN Average Prediction: ' + r'$L_1$ = {}'.format(ATTN_L1_Distance) + r', $L_2$ = {}'.format(ATTN_L2_Distance))
-    
-    plt.plot(train['Close'], label = 'Train')
-    plt.plot(valid['Close'], label = 'Test')
-    
-    plt.legend(loc='best')
-    
     if visualize_results == True:
         
+        plt.figure(figsize=(10,5))
+        plt.title(' Model Forcasting for ' + ticker + weather_label + prediction_legend_label)
+        plt.xlabel('DATE', fontsize=12)
+        plt.ylabel('Close Price USD ($)', fontsize=12)
+        
+        if plot_other_predictions == True:
+        
+            for i in range(0, prediction_num):
+            
+                LSTM_prediction_lable = 'LSTM_Prediction_' + str(i) 
+                CNN_prediction_lable = 'CNN_Prediction_' + str(i)
+                ATTN_prediction_lable = 'ATTN_Prediction_' + str(i)
+                
+                plt.plot(valid[[LSTM_prediction_lable]], alpha=0.1)
+                plt.plot(valid[[CNN_prediction_lable]], alpha=0.1)
+                plt.plot(valid[[ATTN_prediction_lable]], alpha=0.1)
+            
+        
+        plt.plot(valid['LSTM Prediction Average'], label = 'LSTM Average Prediction: ' + r'$L_1$ = {}'.format(LSTM_L1_Distance) + r', $L_2$ = {}'.format(LSTM_L2_Distance))
+        plt.plot(valid['CNN Prediction Average'], label = 'CNN Average Prediction: ' + r'$L_1$ = {}'.format(CNN_L1_Distance) + r', $L_2$ = {}'.format(CNN_L2_Distance))
+        plt.plot(valid['ATTN Prediction Average'], label = 'ATTN Average Prediction: ' + r'$L_1$ = {}'.format(ATTN_L1_Distance) + r', $L_2$ = {}'.format(ATTN_L2_Distance))
+        
+        plt.plot(train['Close'], label = 'Train')
+        plt.plot(valid['Close'], label = 'Test')
+        
+        plt.legend(loc='best')
+            
         plt.show()
         
     return LSTM_L2_Distance, CNN_L2_Distance, ATTN_L2_Distance

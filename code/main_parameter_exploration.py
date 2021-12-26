@@ -9,12 +9,12 @@ def main():
     start_time = time('start')     
 
     # Important Parameters
-    epoch_num = 1 
-    batch_num_vector = [10, 13]
+    epoch_num = 10
+    batch_num_vector = [10, 14]
     training_set_len = .5
-    prediction_window_vector = [10, 13]
+    prediction_window_vector = [10, 14]
     predict_col_num = 3 # Open Price is 3
-    num_of_predictions = 2
+    num_of_predictions = 10
     prediction_parameters = [epoch_num, batch_num_vector, training_set_len, prediction_window_vector, predict_col_num, num_of_predictions]
     
     # Tickers for Comparisons
@@ -39,7 +39,11 @@ def main():
     plot_other_predictions = False
     visualize_results = False
     return_L2 = True
-    specifications = [self_predict, with_weather_data, plot_the_data, plot_other_predictions, visualize_results, return_L2]
+    visualize_loss = False
+    visualize_val_loss = False
+    announce_finished = False
+    save_plot = True
+    specifications = [self_predict, with_weather_data, plot_the_data, plot_other_predictions, visualize_results, return_L2, visualize_loss, visualize_val_loss, save_plot]
     
     # Which Model to Run
     single_run = True
@@ -51,7 +55,9 @@ def main():
     run(prediction_parameters, ticker, dates, specifications, models, which_run)
     
     # Announce When Run is Over
-    os.system('say "Finished."')
+    if announce_finished == True:
+        
+        os.system('say "Finished."')
     
     # Print End and Run Time
     end_time = time('end')

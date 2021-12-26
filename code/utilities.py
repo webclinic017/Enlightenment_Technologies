@@ -1,11 +1,39 @@
 from math import log10, floor
-from pytz import timezone
 from datetime import datetime
 
 import numpy as np
 
-import os
+def calculate_multi_L_scores():
+    
+    return 
 
+def calculate_L_scores(data_target, training_data_len, predicted_stock_price, prediction_num):
+    
+    # Visualising the results
+    valid = data_target[training_data_len:]
+    prediction_average = np.zeros(predicted_stock_price.shape[0])
+    
+    for i in range(0, prediction_num):
+        
+        prediction_lable = 'Prediction_' + str(i) 
+        valid[prediction_lable] = predicted_stock_price[:,i]
+        prediction_average += predicted_stock_price[:,i]
+        
+    valid['Prediction Average'] = prediction_average/prediction_num
+    
+    # Accuracy Score
+    for i in range(0, prediction_num):
+        
+        prediction_lable = 'Prediction_' + str(i)
+        L1_Distance, L2_Distance = accuracy(valid[['Close']], valid[[prediction_lable]])
+        
+        L1_Distance += L1_Distance
+        L2_Distance += L2_Distance
+    
+    L1_Distance, L2_Distance = L1_Distance/prediction_num, L2_Distance/prediction_num
+    L1_Distance, L2_Distance = round_sig(L1_Distance), round_sig(L2_Distance)
+    
+    return L1_Distance, L2_Distance
 
 def time(which_time):
     

@@ -2,7 +2,7 @@ from preprocess import data_preprocessing, get_train_data, get_test_data
 from rnn_model import LSTM_Model, CNN_LSTM_Model, CNN_SelfAtten_LSTM_Model, train_model, stock_forcast
 from plotting import visualize_stock_fit, visualize_loss, visualize_val_loss
 from multi_plotting import multi_visualize_stock_fit, mutli_visualize_loss, mutli_visualize_val_loss
-from utilities import print_shape
+from utilities import print_shape, calculate_L_scores
 
 import numpy as np
 
@@ -16,6 +16,9 @@ def run_model(prediction_parameters, ticker, dates, specifications, model_type):
     plot_other_predictions = specifications[3]
     visualize_results = specifications[4]
     return_L2 = specifications[5]
+    visualize_loss = specifications[6]
+    visualize_val_loss = specifications[7]
+    save_plot = specifications[8]
 
     # Important Parameters 
     epoch_num = prediction_parameters[0]
@@ -87,14 +90,25 @@ def run_model(prediction_parameters, ticker, dates, specifications, model_type):
             multiple_loss[k, i] = loss[k]
             multiple_val_loss[k, i] = val_loss[k]
             
+            
+    # Plotting Functions        
+    if visualize_results == True:
         
-    L2_Score = visualize_stock_fit(data_target, training_data_len, multiple_predictions, ticker, selfpredict, prediction_num, model_label, with_temp, plot_other_predictions, visualize_results, return_L2)
-    visualize_loss(multiple_loss, prediction_num, model_label, with_temp, ticker)
-    visualize_val_loss(multiple_val_loss, prediction_num, model_label, with_temp, ticker) 
+        visualize_stock_fit(data_target, training_data_len, multiple_predictions, ticker, selfpredict, prediction_num, model_label, with_temp, plot_other_predictions, visualize_results, return_L2)
+    
+    if visualize_loss == True:
+        
+        visualize_loss(multiple_loss, prediction_num, model_label, with_temp, ticker)
+    
+    if visualize_val_loss == True:
+        
+        visualize_val_loss(multiple_val_loss, prediction_num, model_label, with_temp, ticker) 
     
     if return_L2 == True:
         
-        return L2_Score
+        L1_Distance, L2_Distance = calculate_L_scores(data_target, training_data_len, multiple_predictions, prediction_num)
+        
+        return L2_Distance
     
     
 def run_multi_model(prediction_parameters, ticker, dates, specifications):   

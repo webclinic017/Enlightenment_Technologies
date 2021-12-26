@@ -2,11 +2,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-from utilities import accuracy, round_sig
+from utilities import accuracy, round_sig, calculate_L_scores
 
 pd.options.mode.chained_assignment = None
 
 def visualize_stock_fit(data_target, training_data_len, predicted_stock_price, ticker, selfpredict, prediction_num, model_label, with_temp, plot_other_predictions, visualize_results, return_L2):
+    
+    L1_Distance, L2_Distance = calculate_L_scores(data_target, training_data_len, predicted_stock_price, prediction_num, return_L2)
     
     if selfpredict == True: 
         prediction_legend_label = ' and w/ Selfpredict'
@@ -37,14 +39,7 @@ def visualize_stock_fit(data_target, training_data_len, predicted_stock_price, t
     # Accuracy Score
     for i in range(0, prediction_num):
         
-        prediction_lable = 'Prediction_' + str(i)
-        L1_Distance, L2_Distance = accuracy(valid[['Close']], valid[[prediction_lable]])
-        
-        L1_Distance += L1_Distance
-        L2_Distance += L2_Distance
-    
-    L1_Distance, L2_Distance = L1_Distance/prediction_num, L2_Distance/prediction_num
-    L1_Distance, L2_Distance = round_sig(L1_Distance), round_sig(L2_Distance)
+        prediction_lable = 'Prediction_' + str(i)    
     
     L1_Distance_Label = 'L1 Average Distance: ' + str(L1_Distance)
     L2_Distance_Label = 'L2 Average Distance: ' + str(L2_Distance)
@@ -60,6 +55,7 @@ def visualize_stock_fit(data_target, training_data_len, predicted_stock_price, t
     plt.plot(valid['Close'], label = 'Test')
     #plt.legend(['Train', 'Test'], loc='upper left')
     
+    
     if plot_other_predictions == True:
     
         for i in range(0, prediction_num):
@@ -72,11 +68,9 @@ def visualize_stock_fit(data_target, training_data_len, predicted_stock_price, t
     #plt.legend(['Average Prediction' + r'$L_1$ = {}'.format(L1_Distance) + r', $L_2$ = {}'.format(L2_Distance)], loc='upper left')
     plt.legend(loc='upper left')
     
-    if visualize_results == True:
         
-        plt.show()
+    plt.show()
         
-    return L2_Distance
     
     
 # Utility function for plotting of the model results
