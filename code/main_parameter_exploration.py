@@ -10,9 +10,9 @@ def main():
 
     # Important Parameters
     epoch_num = 3
-    batch_num_vector = [10, 16]
+    batch_num_vector = [10, 20]
     training_set_len = .5
-    prediction_window_vector = [10, 16]
+    prediction_window_vector = [10, 20]
     predict_col_num = 3 # Open Price is 3
     num_of_predictions = 3
     prediction_parameters = [epoch_num, batch_num_vector, training_set_len, prediction_window_vector, predict_col_num, num_of_predictions]
