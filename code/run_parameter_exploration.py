@@ -88,6 +88,8 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
     
     if save_plot == True:
         
+        pickle.dump(fig, open('FigureObject.fig.pickle', 'wb'))
+        
     
     
     
