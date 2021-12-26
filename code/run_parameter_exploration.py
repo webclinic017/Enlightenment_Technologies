@@ -43,7 +43,7 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
             
             remaining_runs = num_runs - batch_num_len * (i - batch_num_vector[0]) - (j - prediction_window_vector[0])
             
-            print('\n######### ' + str(remaining_runs) + ' Runs Remaining #########\n')
+            print('\n######### ' + str(remaining_runs) + ' of ' + str(num_runs) + ' Runs Remaining #########\n')
             
             prediction_window_axis[j - prediction_window_vector[0]] = j
             prediction_parameters[3] = j
