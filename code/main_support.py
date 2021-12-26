@@ -18,7 +18,6 @@ def run_model(prediction_parameters, ticker, dates, specifications, model_type):
     return_L2 = specifications[5]
     visualize_loss = specifications[6]
     visualize_val_loss = specifications[7]
-    save_plot = specifications[8]
 
     # Important Parameters 
     epoch_num = prediction_parameters[0]
