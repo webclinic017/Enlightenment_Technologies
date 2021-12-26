@@ -7,12 +7,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import pickle
+import os 
 
 def run(prediction_parameters, ticker, dates, specifications, models, which_run):
+    
     # Important Parameters 
     batch_num_vector = prediction_parameters[1]
     prediction_window_vector = prediction_parameters[3]
     save_plot = specifications[8]
+    epoch_num = prediction_parameters[0]
+    prediction_num = prediction_parameters[5]
     
     # Make Vectors to Eventually Make Plot With 
     batch_num_len = batch_num_vector[1] - batch_num_vector[0]
@@ -23,6 +27,7 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
     prediction_window_axis = np.zeros(prediction_window_len).reshape(prediction_window_len)
     parameter_exploration_array = np.zeros(batch_num_len*prediction_window_len).reshape(batch_num_len, prediction_window_len)
     
+    # Additional Parameters for Running
     single_run = which_run[0]
     multi_model = which_run[1]
     category_run = which_run[2]
@@ -88,14 +93,12 @@ def run(prediction_parameters, ticker, dates, specifications, models, which_run)
     
     if save_plot == True:
         
-        pickle.dump(fig, open('FigureObject.fig.pickle', 'wb'))
-        
-    
-    
-    
-    
-    
-    
+        cwd = os.getcwd()
+        path = cwd + '/plots/parameter_exploration/'
+        plot_name = 'epoch_' + epoch_num + '_predictions_' + prediction_num + '.fig.pickle'
+
+        with open(path + plot_name, 'wb') as f:
+            pickle.dump(fig, f)
     
     
     
