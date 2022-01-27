@@ -1,5 +1,5 @@
 from utilities import time
-from run_parameter_exploration import run
+from run import run
 
 import os
 
@@ -9,20 +9,20 @@ def main():
     start_time = time('start')     
 
     # Important Parameters
-    epoch_num = 10
-    batch_num_vector = [10, 25]
-    training_set_len = .5
-    prediction_window_vector = [10, 25]
+    epoch_num = 30
+    batch_num = 10   
+    training_set_len = .6
+    prediction_window = 15     
     predict_col_num = 3 # Open Price is 3
-    num_of_predictions = 5
-    prediction_parameters = [epoch_num, batch_num_vector, training_set_len, prediction_window_vector, predict_col_num, num_of_predictions]
+    num_of_predictions = 1
+    prediction_parameters = [epoch_num, batch_num, training_set_len, prediction_window, predict_col_num, num_of_predictions]
     
     # Tickers for Comparisons
     beer_tickers = ['BUD', 'TAP']
     tech_tickers = ['AAPL', 'GOOGL']
     bank_tickers = ['JPM', 'MS']
     pharma_tickers = ['JNJ', 'PFE']
-    ticker = 'JPM'
+    ticker = 'BUD'
     
     # Specify the Models Being Considered
     models = ['lstm', 'cnn_lstm', 'cnn_lstm_attn']
@@ -35,15 +35,9 @@ def main():
     # Additional Function Specifications
     self_predict = False
     with_weather_data = False
-    plot_the_data = False
+    plot_the_data = True
     plot_other_predictions = False
-    visualize_results = False
-    return_L2 = True
-    visualize_loss = False
-    visualize_val_loss = False
-    announce_finished = False
-    save_plot = True
-    specifications = [self_predict, with_weather_data, plot_the_data, plot_other_predictions, visualize_results, return_L2, visualize_loss, visualize_val_loss, save_plot]
+    specifications = [self_predict, with_weather_data, plot_the_data, plot_other_predictions]
     
     # Which Model to Run
     single_run = True
@@ -55,9 +49,7 @@ def main():
     run(prediction_parameters, ticker, dates, specifications, models, which_run)
     
     # Announce When Run is Over
-    if announce_finished == True:
-        
-        os.system('say "Finished."')
+    os.system('say "Finished."')
     
     # Print End and Run Time
     end_time = time('end')
