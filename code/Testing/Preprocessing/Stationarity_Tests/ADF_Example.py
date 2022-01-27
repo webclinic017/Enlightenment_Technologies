@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+# From https://www.machinelearningplus.com/time-series/augmented-dickey-fuller-test/
+
 # Augmented Dickey Fuller test (ADF Test) is a common statistical test used to test 
 # whether a given Time series is stationary or not. It is one of the most commonly 
 # used statistical test when it comes to analyzing the stationary of a series.

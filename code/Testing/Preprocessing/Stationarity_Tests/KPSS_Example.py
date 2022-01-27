@@ -1,9 +1,15 @@
-from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.stattools import kpss
 
 import matplotlib.pyplot as plt
+import statsmodels.api as sm
 import pandas as pd
 import numpy as np
 
+import warnings
+warnings.filterwarnings("ignore")
+
+
+# From https://www.analyticsvidhya.com/blog/2021/06/statistical-tests-to-check-stationarity-in-time-series-part-1/
 
 # The KPSS test, short for, Kwiatkowski-Phillips-Schmidt-Shin (KPSS), is a type of Unit root test 
 # that tests for the stationarity of a given series around a deterministic trend. In other words, 
@@ -21,38 +27,65 @@ import numpy as np
 
 #%%
 
-# ADF Test on Known Non-Stationary Time-Series
+# KPSS Test on Known Non-Stationary Time-Series w/ Seasonality
 
-url = 'https://raw.githubusercontent.com/selva86/datasets/master/a10.csv'
-df = pd.read_csv(url, parse_dates=['date'], index_col='date')
-series = df.loc[:, 'value'].values
-df.plot(figsize=(14,8), legend=None, title='a10 - Drug Sales Series')
+# Load the dataset
+df = sm.datasets.sunspots.load_pandas().data
+df.shape
+print("Dataset has {} records and {} columns".format(df.shape[0], df.shape[1]))
+df['YEAR'] = pd.Index(sm.tsa.datetools.dates_from_range('1700', '2008'))
+df.index = df['YEAR']
+del df['YEAR']
+df.head()
+plt.figure(figsize=(16,5))
 
-# ADF Test
-result = adfuller(series, autolag='AIC')
-print(f'ADF Statistic: {result[0]}')
-print(f'n_lags: {result[1]}')
-print(f'p-value: {result[1]}')
-for key, value in result[4].items():
+# Plot the data
+plt.plot(df.index, df['SUNACTIVITY'], label = "SUNACTIVITY")
+plt.legend(loc='best')
+plt.title("Sunspot Data from year 1700 to 2008")
+plt.show()
+
+series = df.loc[:, 'SUNACTIVITY'].values
+series = series[:, np.newaxis]
+
+def kpss_test(series, **kw):    
+    statistic, p_value, n_lags, critical_values = kpss(series, **kw)
+    # Format Output
+    print(f'KPSS Statistic: {statistic}')
+    print(f'p-value: {p_value}')
+    print(f'num lags: {n_lags}')
     print('Critial Values:')
-    print(f'   {key}, {value}')  
+    for key, value in critical_values.items():
+        print(f'   {key} : {value}')
+    print(f'Result: The series is {"not " if p_value < 0.05 else ""}stationary')
     
+# Call the function and run the test
+kpss_test(series)
+
+
 #%%
 
-# ADF Test on Stationary Time-Series
+# KPSS Test on Known Stationary Time-Series
 
-# ADF test on random numbers
+# KPSS test on random numbers
 series = np.random.randn(100)
 a_list = list(range(0, 100))
-result = adfuller(series, autolag='AIC')
-print(f'ADF Statistic: {result[0]}')
-print(f'p-value: {result[1]}')
-for key, value in result[4].items():
-    print('Critial Values:')
-    print(f'   {key}, {value}')
+
+kpss_test(series)
     
 fig, axes = plt.subplots(figsize=(10,7))
 plt.plot(series);
-plt.title('Random');
-    
-    
+plt.title('Random')
+
+
+
+
+
+
+
+
+
+
+
+
+
