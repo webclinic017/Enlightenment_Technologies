@@ -19,11 +19,6 @@ import numpy as np
 
 
 
-
-
-
-
-
 #%%
 
 # ADF Test on Known Non-Stationary Time-Series
