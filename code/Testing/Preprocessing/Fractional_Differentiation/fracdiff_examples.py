@@ -1,16 +1,7 @@
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-
-from pandas.plotting import register_matplotlib_converters
-from pandas_datareader import data
-
 from fracdiff.sklearn import FracdiffStat, Fracdiff
-from fracdiff.sklearn.stat import StatTester 
 from fracdiff.fdiff import fdiff_coef 
 from fracdiff import fdiff
 
-from scipy.special import binom
 
 import statsmodels.tsa.stattools as stattools
 import matplotlib.pyplot as plt
@@ -18,7 +9,6 @@ import pandas as pd
 import numpy as np
 
 import pandas_datareader
-import seaborn
 
 # Adopted from https://github.com/simaki/fracdiff/blob/main/sample/examples/examples.ipynb
 
