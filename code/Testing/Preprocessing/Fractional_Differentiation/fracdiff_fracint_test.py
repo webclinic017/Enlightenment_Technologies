@@ -14,11 +14,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-frac_diff_value = .95
+# Fractional Differentiation Using 
+
+frac_diff_value = .99
 frac_int_value = -frac_diff_value
 
 x = np.arange(0,10*np.pi,0.01)   # start,stop,step
-y = np.sin(x)
+y = x
+#y = np.sin(x)
 
 y_diff = fdiff(y, n = frac_diff_value)
 y_int = fdiff(y_diff, n = frac_int_value)
