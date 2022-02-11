@@ -1,16 +1,9 @@
-import numpy as np
-from fracdiff import fdiff
+import matplotlib.pyplot as plt
+import pandas as pd
+import pandas_datareader
+import seaborn
+from pandas.plotting import register_matplotlib_converters
+from pandas_datareader import data
 
-a = np.array([1, 2, 4, 7, 0])
-fdiff(a, 0.5)
-# array([ 1.       ,  1.5      ,  2.875    ,  4.6875   , -4.1640625])
-np.array_equal(fdiff(a, n=1), np.diff(a, n=1))
-# True
+seaborn.set_style("white")
 
-a = np.array([[1, 3, 6, 10], [0, 5, 6, 8]])
-fdiff(a, 0.5, axis=0)
-# array([[ 1. ,  3. ,  6. , 10. ],
-#        [-0.5,  3.5,  3. ,  3. ]])
-fdiff(a, 0.5, axis=-1)
-# array([[1.    , 2.5   , 4.375 , 6.5625],
-#        [0.    , 5.    , 3.5   , 4.375 ]])
