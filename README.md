@@ -3,7 +3,8 @@ Predicting Stocks, RL Portolio Managament, and Automated Trading
 
 # To-Do: First 
 ✓ Make code which can investigate the parameter space of window size, batch size and etc. 
-- Preprocess Stock data better - fractionally differentiate sequentially price data
+✓ Preprocess Stock data better - Investigate fractionally differentiate sequentially price data
+- Make script which can change how data is preprocessed prior to learning, and then reconverting back to normal price values
 - Make code to download min-by-min stock data from yfinance and add to exisiting .csv file
 - Run code off of .csv's rather than yfinance
 - Make code that can analyze multiple stocks as an input to predict a single stock 
