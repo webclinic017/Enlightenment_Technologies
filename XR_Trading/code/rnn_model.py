@@ -20,10 +20,10 @@ class CNN_SelfAtten_LSTM_Model(keras.Model):
         
         #Adding the LSTM layers and some Dropout regularisation
         self.LSTM_1 = LSTM(units = 128, return_sequences = True)
-        self.Dropout_1 = Dropout(0.2)   
+        self.Dropout_1 = Dropout(0.4)   
         
         self.LSTM_2 = LSTM(units = 128, return_sequences = True)
-        self.Dropout_2 = Dropout(0.2)   
+        self.Dropout_2 = Dropout(0.4)   
         
         # Adding a SeqSelfAttention
         self.SeqSelfAttention_1 = SeqSelfAttention(attention_activation='sigmoid')
@@ -78,49 +78,13 @@ def train_model(model, input_shape, validation, X_train, y_train, epoch_num, bat
     return history
     
 
-def stock_forcast(model, X_test, close_scale, selfpredict, prediction_window):
-    
-    if selfpredict == False:
-    
-        predicted_stock_price = model.predict(X_test)
-        predicted_stock_price = close_scale.inverse_transform(predicted_stock_price)
-    
-    
-    else:
+def forcast(model, X_test, so2_scale, prediction_window):
+
         
-        predicted_length = X_test[:,0].shape[0]
-        predicted_stock_price = np.zeros((predicted_length,1))
-        
-        temp = X_test[0,:]
-        
-        early_end = predicted_length
-        
-        # Predict Future Values Using Past Predicted Values
-        for i in range(0, early_end):#predicted_length):
-            
-            if i % 100 == 0:
-                
-                print('{} Remaining Predictions'.format(predicted_length - i))  
-            
-            temp = np.reshape(temp, (1, prediction_window, 1))
-            prediction = model.predict(temp)[0]
-            predicted_stock_price[i] = prediction
-            temp = np.reshape(temp, (prediction_window, 1))
-            shift_temp = temp
-            
-            for j in range(0, prediction_window):
-                
-                if j < prediction_window - 1:
-                    
-                    temp[j] = shift_temp[j + 1]
-                    
-                if j == prediction_window - 1:     
-                    
-                    temp[j] = prediction
-            
-        predicted_stock_price = close_scale.inverse_transform(predicted_stock_price)        
+    predicted_values = model.predict(X_test)
+    predicted_values = so2_scale.inverse_transform(predicted_values)      
     
-    return predicted_stock_price
+    return predicted_values
 
 
 
