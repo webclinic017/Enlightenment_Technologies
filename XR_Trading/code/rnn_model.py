@@ -20,10 +20,10 @@ class CNN_SelfAtten_LSTM_Model(keras.Model):
         
         #Adding the LSTM layers and some Dropout regularisation
         self.LSTM_1 = LSTM(units = 128, return_sequences = True)
-        self.Dropout_1 = Dropout(0.4)   
+        self.Dropout_1 = Dropout(0.8)   
         
         self.LSTM_2 = LSTM(units = 128, return_sequences = True)
-        self.Dropout_2 = Dropout(0.4)   
+        self.Dropout_2 = Dropout(0.5)   
         
         # Adding a SeqSelfAttention
         self.SeqSelfAttention_1 = SeqSelfAttention(attention_activation='sigmoid')

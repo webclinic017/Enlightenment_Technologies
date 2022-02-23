@@ -1,6 +1,6 @@
 from preprocess import data_preprocessing, get_train_data, get_test_data
 from rnn_model import CNN_SelfAtten_LSTM_Model, train_model, forcast
-from plotting import visualize_fit, visualize_loss, visualize_val_loss, plot_data
+from plotting import visualize_fit, visualize_loss, visualize_val_loss
 from utilities import print_shape
 
 import numpy as np
@@ -37,7 +37,7 @@ def run_model(prediction_parameters, training_data, testing_data):
     multiple_loss = np.zeros((epoch_num, prediction_num))
     multiple_val_loss = np.zeros((epoch_num, prediction_num))
     
-    print(input_shape)
+    #print(input_shape)
     
     # Begin Training and Instantiating Model
     model = CNN_SelfAtten_LSTM_Model(input_shape)
