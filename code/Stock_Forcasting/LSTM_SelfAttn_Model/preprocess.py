@@ -75,9 +75,6 @@ def data_preprocessing(training_set_len, prediction_window, ticker, start_date, 
         # Pull the Data in the Form of the Dataframe
         filename, dates, weathers, all_stock_data = convert_csv(weather_filename, ticker, start_date, end_date)
 
-        # Temp Dataframes
-        
-
         # Put Appropiate Dataframes Together
         all_data = pd.concat([dates, all_stock_data, weathers], axis=1)
         all_stock_data = pd.concat([dates, all_stock_data], axis=1) 
